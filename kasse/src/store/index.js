@@ -10,8 +10,20 @@ const vuexLocal = new VuexPersistence({
 
 export default new Vuex.Store({
   state: {
+    order: [],
+  },
+  getters:{
+    sum(state) {
+      return state.order.reduce((acc, cur) => acc + cur.price, 0)
+    }
   },
   mutations: {
+    appendOrder (state, order) {
+      state.order.push(order)
+    },
+    clearOrder (state) {
+      state.order = []
+    }
   },
   actions: {
   },

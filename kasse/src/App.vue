@@ -1,55 +1,96 @@
 <template>
   <v-app>
-    <v-app-bar
+    <v-navigation-drawer
+      v-model="showOrder"
       app
-      color="primary"
-      dark
+      width="300"
+      right
+      fixed
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
+      <OrderList 
+        v-model="order"
+      />
+    </v-navigation-drawer>
     <v-main>
-      <router-view/>
+      <CheckOut v-model="checkout" />
+      <div>
+        <v-btn
+          class="hide-btn" 
+          :style="showOrder ? 'right: 300px;' : 'right: 0px;'"
+          @click="showOrder = !showOrder"
+          icon
+        >
+          <v-icon v-if="showOrder">
+            mdi-chevron-right
+          </v-icon>
+          <v-icon v-else>
+            mdi-chevron-left
+          </v-icon>
+        </v-btn>
+      </div>
+      <router-view />
     </v-main>
+    <v-footer 
+      padless
+      style="z-index: 100;"
+      color="teal darken-4"
+      dark
+      fixed
+    >
+    <v-col
+      class="text-center"
+      cols="10"
+    >
+      <v-btn @click="checkout = true" text width="100%" height="50px">
+        <h1>BEZAHLEN</h1>
+      </v-btn>
+    </v-col>
+    <v-col
+      class="text-right"
+      cols="2"
+    >
+      <h1>{{sum}}€</h1>
+    </v-col>
+  </v-footer>
   </v-app>
 </template>
 
 <script>
+import OrderList from '@/components/OrderList.vue'
+import CheckOut from '@/components/CheckOut.vue'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'App',
+  components: {
+    OrderList,
+    CheckOut
+  },
 
   data: () => ({
-    //
+    showOrder: false,
+    checkout: false,
   }),
+
+  computed: {
+    ...mapState([
+      'order'
+    ]),
+    ...mapGetters([
+      'sum'
+    ]),
+  },
+  watch: {
+    order(newOrder){
+      this.showOrder = this.order.length > 0
+    }
+  }
 };
 </script>
+
+<style scoped>
+.hide-btn{
+  position: fixed;
+  top: 50%;
+}
+</style>
