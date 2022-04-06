@@ -14,7 +14,10 @@
       <v-img
         src="https://www.prost.com/img/de/hannover/bars/k4-bar-2-slider_item.jpeg"
         height="200px"
-      ></v-img>
+        class="white--text align-center justify-center"
+      >
+        <!--<v-icon width="1000px" class="mx-auto" color="white">mdi-plus</v-icon>-->
+      </v-img>
     </v-card>
     <v-card-actions class="d-flex justify-space-around">
       <v-btn 
