@@ -1,7 +1,9 @@
 <template>
   <div class="home">
-    <v-btn @click="add()">Add</v-btn>
-    <v-btn @click="clearOrder()">Clear</v-btn>
+    <center>
+    <v-btn class="ma-15" @click="add()">Add</v-btn>
+    <v-btn class="ma-15" @click="clearOrder()">Clear</v-btn>
+    </center>
   </div>
 </template>
 

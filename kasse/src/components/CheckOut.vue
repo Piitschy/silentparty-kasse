@@ -24,8 +24,8 @@
           <h1>{{sum}}€</h1>
         </v-toolbar>
         <center>
-          <h1>{{fix(sum-cent)}}€</h1>
-          <h1>{{fix(cent)}}€</h1>
+          <h1 class="ma-2">{{fix(sum-cent)}}€</h1>
+          <h1 class="ma-2">{{fix(cent)}}€</h1>
           <v-col
             v-for="m in 4"
             :key="m"
@@ -55,6 +55,16 @@
             </v-item-group>
             
           </v-col>
+          <v-btn 
+            class="mt-5" 
+            :disabled="!ready"
+            width="300px" 
+            height="100px" 
+            color="success"
+            @click="clearOrder();display = '0';$emit('input', false)"
+          >
+            <h1>FERTIG</h1>
+          </v-btn>
         </center>
       </v-card>
     </v-dialog>
@@ -93,9 +103,15 @@ export default {
     ]),
     cent(){
       return this.display/100
+    },
+    ready() {
+      return this.sum > 0 && this.cent > this.sum
     }
   },
   methods: {
+    ...mapMutations([
+      'clearOrder'
+    ]),
     key(n,m){
       return this.mapping[n+''+m]
     },
