@@ -14,7 +14,8 @@ export default new Vuex.Store({
   },
   getters:{
     sum(state) {
-      return state.order.reduce((acc, cur) => acc + cur.price, 0)
+      let sum = state.order.reduce((acc, cur) => acc + cur.price, 0)
+      return parseFloat(sum).toFixed(2)
     }
   },
   mutations: {
