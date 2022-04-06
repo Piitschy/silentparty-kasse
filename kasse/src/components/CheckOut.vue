@@ -24,8 +24,8 @@
           <h1>{{sum}}€</h1>
         </v-toolbar>
         <center>
-          <h1>{{sum-display}}€</h1>
-          <h1>{{display}}€</h1>
+          <h1>{{fix(sum-cent)}}€</h1>
+          <h1>{{fix(cent)}}€</h1>
           <v-col
             v-for="m in 4"
             :key="m"
@@ -83,18 +83,24 @@ export default {
         '33': '3',
         '14': 'C',
         '24': '0',
-        '34': '.',
+        '34': '00',
       }
     }
   },
   computed: {
     ...mapGetters([
       'sum'
-    ])
+    ]),
+    cent(){
+      return this.display/100
+    }
   },
   methods: {
     key(n,m){
       return this.mapping[n+''+m]
+    },
+    fix(str){
+      return parseFloat(str).toFixed(2)
     },
     onKey(e){
       if(e === 'C'){
