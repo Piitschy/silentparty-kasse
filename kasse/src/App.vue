@@ -39,7 +39,7 @@
     >
     <v-col
       class="text-center"
-      cols="10"
+      cols="8"
     >
       <v-btn @click="checkout = true" text width="100%" height="50px">
         <h1>BEZAHLEN</h1>
@@ -47,7 +47,7 @@
     </v-col>
     <v-col
       class="text-right"
-      cols="2"
+      cols="4"
     >
       <h1>{{sum}}€</h1>
     </v-col>
