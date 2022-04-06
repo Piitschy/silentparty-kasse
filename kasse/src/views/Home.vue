@@ -8,12 +8,10 @@
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue'
 import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'Home',
   components: {
-    HelloWorld,
   },
   methods: {
     ...mapMutations([

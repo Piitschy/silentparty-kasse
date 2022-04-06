@@ -16,7 +16,7 @@
       <div>
         <v-btn
           class="hide-btn" 
-          :style="showOrder ? 'right: 300px;' : 'right: 0px;'"
+          :style="'right: '+border+'px;'"
           @click="showOrder = !showOrder"
           icon
         >
@@ -28,7 +28,9 @@
           </v-icon>
         </v-btn>
       </div>
-      <router-view />
+      <div>
+        <router-view />
+      </div>
     </v-main>
     <v-footer 
       padless
@@ -79,12 +81,26 @@ export default {
     ...mapGetters([
       'sum'
     ]),
+    border(){
+      return this.showOrder ? 300 : 0
+    }
+  },
+  methods: {
+    checkOrder() {
+      this.showOrder = this.order.length > 0
+    }
   },
   watch: {
     order(newOrder){
-      this.showOrder = this.order.length > 0
+      this.checkOrder()
+    },
+    sum(newSum){
+      this.checkOrder()
     }
-  }
+  },
+  mounted() {
+    this.checkOrder()
+  },
 };
 </script>
 

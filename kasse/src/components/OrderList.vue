@@ -1,16 +1,25 @@
 <template>
   <div style="min-height: 100vh;">
-    <v-simple-table>
+    <v-btn 
+      class="mx-auto" 
+      width="100%"
+      :disabled="order.length == 0"
+      @click="clearOrder()"
+      color="error"
+    >
+      <v-icon>mdi-delete-sweep</v-icon>
+    </v-btn>
+    <v-simple-table class="mx-1">
       <template v-slot:default>
         <thead>
-          <tr>
+          <tr >
             <th class="text-left">
               Produkt
             </th>
-            <th class="text-left">
+            <th class="text-right">
               Anzahl
             </th>
-            <th class="text-left">
+            <th class="text-right">
               Preis
             </th>
           </tr>
@@ -20,9 +29,15 @@
             v-for="o in order"
             :key="o.name"
           >
-            <td>{{ o.name }}</td>
-            <td>{{ o.number }}</td>
-            <td>{{ o.price }}€</td>
+            <td class="text-left">
+              {{ o.name }}
+            </td>
+            <td class="text-right">
+              {{ o.number }}
+            </td>
+            <td class="text-right">
+              {{ o.price }}€
+            </td>
           </tr>
         </tbody>
       </template>
@@ -48,14 +63,11 @@ export default {
       'sum'
     ]),
   },
-  watch: {
-    order(){
-      const options = {
-
-      }
-      //this.$vuetify.goTo(9999, options)
-    }
-  }
+  methods: {
+    ...mapMutations([
+      'clearOrder'
+    ]),
+  },
 }
 
 </script>

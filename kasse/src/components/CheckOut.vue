@@ -105,7 +105,7 @@ export default {
       return this.display/100
     },
     ready() {
-      return this.sum > 0 && this.cent > this.sum
+      return this.sum > 0 && this.cent >= this.sum
     }
   },
   methods: {
